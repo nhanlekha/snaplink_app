@@ -6,6 +6,7 @@ import 'package:snaplink_app/view/screens/chat/page_chat/chat_screens.dart';
 import 'package:snaplink_app/view/screens/post/up_post_screens.dart';
 
 import '../../../routers/app_route_constants.dart';
+import '../profire/profire_screens.dart';
 
 class MainScreens extends StatefulWidget {
   const MainScreens({super.key});
@@ -27,7 +28,7 @@ class _MainScreensState extends State<MainScreens> {
       ChatScreens(),
       Container(color: Colors.green),
       UpPostScreens(),
-      Container(color: Colors.amberAccent),
+      const ProfileScreen(),
     ];
   }
 

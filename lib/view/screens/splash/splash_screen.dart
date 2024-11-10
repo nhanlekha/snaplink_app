@@ -1,6 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:snaplink_app/app/app_cubit.dart';
 import 'package:snaplink_app/app/app_state.dart';
 
@@ -22,11 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToNextScreen() async {
-    // Đợi 5 giây
     await Future.delayed(const Duration(seconds: 1));
-
     final state = context.read<AppCubit>().state;
-
     // Kiểm tra trạng thái xác thực và điều hướng tương ứng
     switch (state.authStatus) {
       case AuthStatus.unknown:
@@ -44,32 +43,33 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue, // Màu nền
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Logo của ứng dụng
-            Image.asset(
-              'assets/images/home.png', // Đường dẫn đến logo
-              width: 100,
-              height: 100,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF69A7FF), // Màu đầu tiên
+                Color(0xFF3A7BD5), // Màu thứ hai
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [0.0, 1.0], // Điều chỉnh độ lan tỏa của gradient
             ),
-            const SizedBox(height: 20),
-            // Tên ứng dụng
-            const Text(
-              'Social App',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+          ),
+          child: AnimatedSplashScreen(
+            splash: Column(
+              children: [
+                Center(
+                  child: LottieBuilder.asset(
+                    "assets/lottie/Animation - 1731243996054.json",
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            const CircularProgressIndicator(
-              color: Colors.white,
-            ), // Vòng tròn loading
-          ],
+            duration: 1000,
+            splashIconSize: 550,
+            nextScreen: Container(),
+          ),
         ),
       ),
     );

@@ -14,8 +14,7 @@ class FirebaseAuthService {
     } catch (e) {}
   }
 
-  Future<UserModel?> registerWithEmailAndPass({
-    required String name,
+  Future<UserCredential?> registerWithEmailAndPass({
     required String email,
     required String pass,
   }) async {
@@ -27,16 +26,8 @@ class FirebaseAuthService {
         password: pass,
       );
 
-      User? user = userCredential.user;
-
-      if (user != null) {
-        // Tạo một đối tượng UserModel từ thông tin người dùng
-        UserModel userModel = UserModel(
-          id: user.uid,
-          name: name,
-          email: user.email,
-        );
-        return userModel; // Trả về thông tin người dùng
+      if (userCredential.user != null) {
+        return userCredential;
       }
     } catch (e) {
       // Xử lý lỗi (có thể ném lại hoặc log lỗi)

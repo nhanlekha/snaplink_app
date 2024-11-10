@@ -12,8 +12,6 @@ abstract class AuthRepo {
   });
 
   Future<void> registerWithEmailAndPass({
-    required String name,
-    required String email,
-    required String pass,
+    required UserModel userModel,
   });
 }

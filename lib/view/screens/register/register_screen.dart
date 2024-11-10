@@ -1,86 +1,45 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:animation_wrappers/animations/faded_slide_animation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../bloc/register/register_cubit.dart';
 import '../../../domans/auth_repo/auth_repo.dart';
-import '../../../routers/app_route_constants.dart';
-import '../../widgets/form_container_widget.dart';
-import '../../widgets/toast_widget.dart';
+import '../../../model/user_model.dart';
+import '../../components/theme/colors.dart';
+import '../../components/widget_custom/continue_button.dart';
+import '../../components/widget_custom/entry_field.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: const AppBarTitle(),
-      ),
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) {
-            final authRepo = context.read<AuthRepo>();
-            return RegisterCubit(authRepo: authRepo);
-          },
-          child: const RegisterPage(),
-        ),
-      ),
+          child: BlocProvider(
+        create: (context) {
+          final authRepo = context.read<AuthRepo>();
+          return RegisterCubit(authRepo: authRepo);
+        },
+        child: RegisterBody(),
+      )),
     );
   }
 }
 
-class AppBarTitle extends StatelessWidget {
-  const AppBarTitle({Key? key}) : super(key: key);
+class RegisterBody extends StatefulWidget {
+  const RegisterBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _AppTitleText("Snap", Colors.blue),
-        _AppTitleText("Link", Colors.green),
-        _AppTitleText(" Project", Colors.amber),
-      ],
-    );
-  }
+  _RegisterBodyBodyState createState() => _RegisterBodyBodyState();
 }
 
-class _AppTitleText extends StatelessWidget {
-  final String text;
-  final Color color;
-
-  const _AppTitleText(this.text, this.color, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: color,
-        fontSize: 22.0,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-}
-
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
-
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterBodyBodyState extends State<RegisterBody> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isSigning = false;
 
   @override
   void dispose() {
@@ -92,120 +51,88 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border.all(color: transparentColor),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: const EdgeInsets.all(16.0),
+      child: FadedSlideAnimation(
+        beginOffset: const Offset(0, 0.3),
+        endOffset: const Offset(0, 0),
+        slideCurve: Curves.linearToEaseOut,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Đăng ký",
-              style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              "youWillNeed".tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(color: secondaryColor),
             ),
-            const SizedBox(height: 30),
-            FormContainerWidget(
+            Spacer(),
+            EntryField(
               controller: _nameController,
-              hintText: "Tên Người Dùng",
-              isPasswordField: false,
+              label: "fullName".tr(),
             ),
-            const SizedBox(height: 10),
-            FormContainerWidget(
+            EntryField(
               controller: _emailController,
-              hintText: "Email",
-              isPasswordField: false,
+              label: "enterPhone".tr(),
             ),
-            const SizedBox(height: 10),
-            FormContainerWidget(
+            EntryField(
               controller: _passwordController,
-              hintText: "Mật Khẩu",
-              isPasswordField: true,
+              label: "password".tr(),
             ),
-            const SizedBox(height: 30),
-            _buildSignInButton(),
-            const SizedBox(height: 10),
-            _buildGoogleSignInButton(),
-            const SizedBox(height: 20),
-            _buildSignUpLink(context),
+            CustomButton(onPressed: () => {_signIn()}),
+            const Spacer(flex: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Add your click event code here
+                    context.go('/login');
+                  },
+                  child: Text(
+                    "signUpNow".tr(),
+                    style: const TextStyle(color: Colors.indigoAccent),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Text(
+                  style: const TextStyle(color: Colors.white),
+                  " ${"orContinueWith".tr()}",
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            const Spacer(),
+            CustomButton(
+              icon: Image.asset(
+                'assets/icons/ic_fb.png',
+                height: 20,
+              ),
+              text: 'facebookAccount'.tr(),
+              color: fbColor,
+              onPressed: () => {},
+            ),
+            CustomButton(
+              icon: Image.asset(
+                'assets/icons/ic_ggl.png',
+                height: 20,
+              ),
+              text: 'googleAccount'.tr(),
+              color: secondaryColor,
+              textColor: darkColor,
+              onPressed: () => {},
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildSignInButton() {
-    return GestureDetector(
-      onTap: _isSigning ? null : _signIn,
-      child: Container(
-        width: double.infinity,
-        height: 45,
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: _isSigning
-              ? const CircularProgressIndicator(color: Colors.white)
-              : const Text(
-                  "Đăng Ký",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGoogleSignInButton() {
-    return GestureDetector(
-      onTap: _signInWithGoogle,
-      child: Container(
-        width: double.infinity,
-        height: 45,
-        decoration: BoxDecoration(
-          color: Colors.indigoAccent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.ac_unit_rounded, color: Colors.white),
-              SizedBox(width: 5),
-              Text(
-                "Đăng Nhập Bằng Google",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignUpLink(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text("Bạn có tài khoản?"),
-        const SizedBox(width: 5),
-        GestureDetector(
-          onTap: () {
-            GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
-          },
-          child: const Text(
-            "Đăng nhập",
-            style: TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -215,56 +142,10 @@ class _RegisterPageState extends State<RegisterPage> {
     final password = _passwordController.text;
 
     final registerCubit = BlocProvider.of<RegisterCubit>(context);
-    registerCubit.register(name, email, password);
+    UserModel userModel =
+        UserModel(id: "", name: name, email: email, avatar: "", pass: password);
+    registerCubit.register(userModel);
 
-    return;
-
-    setState(() => _isSigning = true);
-
-    if (!validateEmail(email)) {
-      showToast(message: 'Email không hợp lệ');
-      setState(() => _isSigning = false);
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      showToast(message: 'Mật khẩu phải có ít nhất 6 ký tự');
-      setState(() => _isSigning = false);
-      return;
-    }
-
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      showToast(message: 'Đăng nhập thành công');
-    } catch (e) {
-      showToast(message: 'Lỗi: $e');
-    } finally {
-      setState(() => _isSigning = false);
-    }
-  }
-
-  bool validateEmail(String email) {
-    final regex = RegExp(
-        r'^[a-zA-Z0-9.a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+$');
-    return regex.hasMatch(email);
-  }
-
-  bool validatePassword(String password) => password.length >= 6;
-
-  Future<void> _signInWithGoogle() async {
-    try {
-      final googleUser = await GoogleSignIn().signIn();
-      if (googleUser != null) {
-        final googleAuth = await googleUser.authentication;
-        final credential = GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        );
-        await FirebaseAuth.instance.signInWithCredential(credential);
-      }
-    } catch (e) {
-      showToast(message: 'Lỗi: $e');
-    }
+    context.go('/login');
   }
 }

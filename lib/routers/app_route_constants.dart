@@ -6,7 +6,7 @@ class RouteConstants {
   static const String profileRouteName = 'profile';
   static const String contactUsRouteName = 'contact_us';
 
-  static const String signUpRoute = "signup";
+  static const String signUpRoute = "sign-up";
 
   static const String loginRoute = "login";
 

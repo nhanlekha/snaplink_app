@@ -57,19 +57,19 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> registerWithEmailAndPass(
-      {required String name,
-      required String email,
-      required String pass}) async {
+  Future<void> registerWithEmailAndPass({required UserModel userModel}) async {
     // TODO: implement registerWithEmailAndPass
     try {
-      UserModel? userModel = await firebaseAuthService.registerWithEmailAndPass(
-          name: name, email: email, pass: pass);
-      // Tạo dữ liệu vào db
-      if (userModel != null) {
+      UserCredential? userCredential =
+          await firebaseAuthService.registerWithEmailAndPass(
+              email: userModel.email.toString(),
+              pass: userModel.pass.toString());
+
+      if (userCredential != null) {
+        userModel.id = userCredential.user!.uid;
         await FirebaseFirestore.instance
             .collection("users")
-            .doc(userModel.id)
+            .doc(userCredential.user?.uid)
             .set(userModel.toMap());
       }
     } catch (e) {
