@@ -70,29 +70,12 @@ class SnapLinkRouter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter.returnRouter(),
-        localizationsDelegates: context.localizationDelegates,
-        locale: context.locale,
-        supportedLocales: context.supportedLocales,
-        builder: (context, child) {
-          return BlocListener<AppCubit, AppState>(
-            listener: (context, state) {
-              switch (state.authStatus) {
-                case AuthStatus.unknown:
-                  GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
-                  break;
-                case AuthStatus.unauthenticated:
-                  GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
-                  break;
-                case AuthStatus.authenticated:
-                  GoRouter.of(context).pushNamed(RouteConstants.homeRouteName);
-                  break;
-              }
-            },
-            child: child,
-          );
-        });
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.returnRouter(),
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+    );
   }
 }
 
@@ -101,6 +84,19 @@ class SnapLinkMainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SplashScreen();
+    return BlocListener<AppCubit, AppState>(
+      listener: (context, state) {
+        switch (state.authStatus) {
+          case AuthStatus.unknown:
+          case AuthStatus.unauthenticated:
+            GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
+            break;
+          case AuthStatus.authenticated:
+            GoRouter.of(context).pushNamed(RouteConstants.homeRouteName);
+            break;
+        }
+      },
+      child: const SplashScreen(),
+    );
   }
 }
