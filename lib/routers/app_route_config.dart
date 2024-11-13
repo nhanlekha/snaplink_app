@@ -29,7 +29,6 @@ class AppRouter {
             return MaterialPage(child: CameraScreens());
           },
         ),
-
         GoRoute(
           name: RouteConstants.upPostRoute,
           path: '/up_post',
@@ -41,7 +40,6 @@ class AppRouter {
             );
           },
         ),
-
         GoRoute(
           name: RouteConstants.signUpRoute,
           path: '/sign-up',
@@ -63,32 +61,10 @@ class AppRouter {
             return MaterialPage(child: MainScreens());
           },
         ),
-        // GoRoute(
-        //   name: RouteConstants.profileRouteName,
-        //   path: '/profile/:username/:userid',
-        //   pageBuilder: (context, state) {
-        //     return MaterialPage(
-        //         child: Profile(
-        //       userid: state.pathParameters['userid']!,
-        //       username: state.pathParameters['username']!,
-        //     ));
-        //   },
-        // ),
       ],
       errorPageBuilder: (context, state) {
-        //page error
         return MaterialPage(child: Container());
       },
-      // redirect: (context, state) {
-      //   bool isAuth = true;
-      //   if (!isAuth &&
-      //       state.uri.toString()
-      //           .startsWith('/${RouteConstants.profileRouteName}')) {
-      //     return context.namedLocation(RouteConstants.contactUsRouteName);
-      //   } else {
-      //     return null;
-      //   }
-      // },
     );
     return router;
   }
