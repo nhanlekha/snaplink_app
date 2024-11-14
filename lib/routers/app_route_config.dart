@@ -12,8 +12,10 @@ import 'package:snaplink_app/view/screens/login/login_screen.dart';
 import 'app_route_constants.dart';
 
 class AppRouter {
+  static GoRouter? _router;
+
   static GoRouter returnRouter() {
-    GoRouter router = GoRouter(
+    _router ??= GoRouter(
       routes: [
         GoRoute(
           name: RouteConstants.mainRouteName,
@@ -33,7 +35,7 @@ class AppRouter {
           name: RouteConstants.upPostRoute,
           path: '/up_post',
           pageBuilder: (context, state) {
-            // Retrieve the `List<File>?` from the `extra` parameter
+            // Lấy List<File>? từ tham số `extra`
             final imagesList = state.extra as List<File>?;
             return MaterialPage(
               child: UpPostScreens(imagesList: imagesList),
@@ -66,6 +68,7 @@ class AppRouter {
         return MaterialPage(child: Container());
       },
     );
-    return router;
+
+    return _router!;
   }
 }
