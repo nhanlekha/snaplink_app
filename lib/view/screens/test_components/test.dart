@@ -14,6 +14,9 @@ class _TestScreenState extends State<TestScreen> {
     return const Scaffold(
       body: Column(
         children: [
+          SizedBox(
+            height: 100,
+          ),
           PostCard(),
         ],
       ),

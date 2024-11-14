@@ -1,14 +1,11 @@
 import 'package:animation_wrappers/Animations/faded_slide_animation.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:snaplink_app/main.dart';
 
 import '../../components/theme/colors.dart';
 import '../../components/widget_custom/profile_page_button.dart';
 import '../../components/widget_custom/row_item.dart';
-import '../../components/widget_custom/score_container.dart';
 import '../../components/widget_custom/sliver_app_delegate.dart';
-import '../../components/widget_custom/tab_grid.dart';
 import '../../components/widget_custom/tab_grid_item.dart';
 import 'followers.dart';
 import 'following.dart';
@@ -43,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyProfileBody();
+    return const MyProfileBody();
   }
 }
 
@@ -108,29 +105,29 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             itemBuilder: (BuildContext context) {
                               return [
                                 PopupMenuItem(
-                                  child: Text('Change Language'),
                                   value: 'Change Language',
                                   textStyle: TextStyle(color: secondaryColor),
+                                  child: const Text('Change Language'),
                                 ),
                                 PopupMenuItem(
-                                  child: Text('Help'),
                                   value: 'Help',
                                   textStyle: TextStyle(color: secondaryColor),
+                                  child: const Text('Help'),
                                 ),
                                 PopupMenuItem(
-                                  child: Text("Redeem Coins"),
                                   value: "Redeem Coins",
                                   textStyle: TextStyle(color: secondaryColor),
+                                  child: const Text("Redeem Coins"),
                                 ),
                                 PopupMenuItem(
-                                  child: Text('Terms of Use'),
                                   value: 'Terms of Use',
                                   textStyle: TextStyle(color: secondaryColor),
+                                  child: const Text('Terms of Use'),
                                 ),
                                 PopupMenuItem(
-                                  child: Text('Logout'),
                                   value: 'Logout',
                                   textStyle: TextStyle(color: secondaryColor),
+                                  child: const Text('Logout'),
                                 )
                               ];
                             },
@@ -138,7 +135,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                         )
                       ],
                       flexibleSpace: Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -153,13 +150,13 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            SizedBox(height: 50),
-                            CircleAvatar(
+                            const SizedBox(height: 50),
+                            const CircleAvatar(
                               radius: 50.0,
                               backgroundImage:
                                   AssetImage('assets/images/user.webp'),
                             ),
-                            Text(
+                            const Text(
                               'BlackFox',
                               style: TextStyle(fontSize: 16),
                             ),
@@ -168,30 +165,30 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                               style: TextStyle(
                                   fontSize: 10, color: disabledTextColor),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 ImageIcon(
-                                  AssetImage("assets/icons/ic_fb.png"),
+                                  const AssetImage("assets/icons/ic_fb.png"),
                                   color: secondaryColor,
                                   size: 10,
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 ImageIcon(
-                                  AssetImage("assets/icons/ic_twt.png"),
+                                  const AssetImage("assets/icons/ic_twt.png"),
                                   color: secondaryColor,
                                   size: 10,
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 ImageIcon(
-                                  AssetImage("assets/icons/ic_insta.png"),
+                                  const AssetImage("assets/icons/ic_insta.png"),
                                   color: secondaryColor,
                                   size: 10,
                                 ),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -200,7 +197,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                     'liked'.tr(),
                                     Scaffold(
                                       appBar: AppBar(
-                                        title: Text('Liked'),
+                                        title: const Text('Liked'),
                                       ),
                                       body: Container(),
                                     )),
@@ -210,12 +207,12 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                     '1.9k', 'following'.tr(), FollowingPage()),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 ProfilePageButton('message', () {}),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 isFollowed
                                     ? ProfilePageButton('following', () {
                                         setState(() {
@@ -234,7 +231,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                       ),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               'comment7'.tr(),
                               textAlign: TextAlign.center,
@@ -251,7 +248,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                           labelColor: mainColor,
                           unselectedLabelColor: lightTextColor,
                           indicatorColor: transparentColor,
-                          tabs: [
+                          tabs: const [
                             Tab(icon: Icon(Icons.dashboard)),
                             Tab(icon: Icon(Icons.favorite_border)),
                             Tab(icon: Icon(Icons.bookmark_border)),
@@ -266,8 +263,8 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                   physics: const BouncingScrollPhysics(),
                   children: <Widget>[
                     FadedSlideAnimation(
-                      beginOffset: Offset(0, 0.3),
-                      endOffset: Offset(0, 0),
+                      beginOffset: const Offset(0, 0.3),
+                      endOffset: const Offset(0, 0),
                       slideCurve: Curves.linearToEaseOut,
                       child: TabGridView(
                         food,
@@ -276,8 +273,8 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                       ),
                     ),
                     FadedSlideAnimation(
-                      beginOffset: Offset(0, 0.3),
-                      endOffset: Offset(0, 0),
+                      beginOffset: const Offset(0, 0.3),
+                      endOffset: const Offset(0, 0),
                       slideCurve: Curves.linearToEaseOut,
                       child: TabGridView(
                         dance,
@@ -286,8 +283,8 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                       ),
                     ),
                     FadedSlideAnimation(
-                      beginOffset: Offset(0, 0.3),
-                      endOffset: Offset(0, 0),
+                      beginOffset: const Offset(0, 0.3),
+                      endOffset: const Offset(0, 0),
                       slideCurve: Curves.linearToEaseOut,
                       child: TabGridView(
                         lol,

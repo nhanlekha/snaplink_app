@@ -54,12 +54,11 @@ class _SnapLinkAppState extends State<SnapLinkApp> {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthRepo>(create: (context) => _authRepo),
+        BlocProvider(
+          create: (context) => AppCubit(authRepo: _authRepo),
+        )
       ],
-      child: BlocProvider(
-        create: (context) => AppCubit(authRepo: _authRepo),
-        child: SnapLinkRouter(),
-      ),
+      child: const SnapLinkRouter(),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:snaplink_app/app/app_cubit.dart';
-import 'package:snaplink_app/app/app_state.dart';
 
 import '../../../routers/app_route_constants.dart';
 import '../../../ultils/enums/auth_status.dart';
@@ -25,8 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+
     final state = context.read<AppCubit>().state;
-    // Kiểm tra trạng thái xác thực và điều hướng tương ứng
     switch (state.authStatus) {
       case AuthStatus.unknown:
         GoRouter.of(context).pushNamed(RouteConstants.loginRoute);

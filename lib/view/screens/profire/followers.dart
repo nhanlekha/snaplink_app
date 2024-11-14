@@ -1,7 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:snaplink_app/main.dart';
 
 import '../../components/theme/colors.dart';
 import '../../components/widget_custom/profile_page_button.dart';
@@ -16,13 +15,17 @@ class User {
 }
 
 class FollowersPage extends StatelessWidget {
+  const FollowersPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return FollowersBody();
+    return const FollowersBody();
   }
 }
 
 class FollowersBody extends StatefulWidget {
+  const FollowersBody({super.key});
+
   @override
   _FollowersBodyState createState() => _FollowersBodyState();
 }
@@ -54,11 +57,11 @@ class _FollowersBodyState extends State<FollowersBody> {
           centerTitle: true,
         ),
         body: FadedSlideAnimation(
-          beginOffset: Offset(0, 0.3),
-          endOffset: Offset(0, 0),
+          beginOffset: const Offset(0, 0.3),
+          endOffset: const Offset(0, 0),
           slideCurve: Curves.linearToEaseOut,
           child: ListView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: users.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -71,10 +74,10 @@ class _FollowersBodyState extends State<FollowersBody> {
                   ),
                   subtitle: Text(
                     users[index].username,
-                    style: TextStyle(),
+                    style: const TextStyle(),
                   ),
                   trailing: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
                     child: users[index].isFollowing
                         ? ProfilePageButton(
                             'following'.tr(),
