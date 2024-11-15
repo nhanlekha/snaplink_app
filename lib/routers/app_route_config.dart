@@ -9,6 +9,7 @@ import 'package:snaplink_app/view/screens/post/up_post_screens.dart';
 import 'package:snaplink_app/view/screens/register/register_screen.dart';
 import 'package:snaplink_app/view/screens/login/login_screen.dart';
 
+import '../view/screens/search/search_screen.dart';
 import 'app_route_constants.dart';
 
 class AppRouter {
@@ -67,7 +68,7 @@ class AppRouter {
           name: RouteConstants.upSearchRoute,
           path: '/search',
           pageBuilder: (context, state) {
-            return const MaterialPage(child: MainScreens());
+            return MaterialPage(child: SearchScreens());
           },
         ),
       ],

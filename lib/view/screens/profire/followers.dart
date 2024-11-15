@@ -77,8 +77,8 @@ class _FollowersBodyState extends State<FollowersBody> {
                     padding: EdgeInsets.symmetric(vertical: 12.0),
                     child: users[index].isFollowing
                         ? ProfilePageButton(
-                            'following'.tr(),
-                            () {
+                            text: 'following'.tr(),
+                            onTap: () {
                               setState(() {
                                 users[index].isFollowing =
                                     !users[index].isFollowing;
@@ -86,8 +86,8 @@ class _FollowersBodyState extends State<FollowersBody> {
                             },
                           )
                         : ProfilePageButton(
-                            'follow'.tr(),
-                            () {
+                            text: 'follow'.tr(),
+                            onTap: () {
                               setState(() {
                                 users[index].isFollowing =
                                     !users[index].isFollowing;
