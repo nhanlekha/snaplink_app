@@ -21,14 +21,14 @@ class AppRouter {
           name: RouteConstants.mainRouteName,
           path: '/',
           pageBuilder: (context, state) {
-            return MaterialPage(child: SnapLinkMainApp());
+            return const MaterialPage(child: SnapLinkMainApp());
           },
         ),
         GoRoute(
           name: RouteConstants.cameraRoute,
           path: '/camera',
           pageBuilder: (context, state) {
-            return MaterialPage(child: CameraScreens());
+            return const MaterialPage(child: CameraScreens());
           },
         ),
         GoRoute(
@@ -46,21 +46,28 @@ class AppRouter {
           name: RouteConstants.signUpRoute,
           path: '/sign-up',
           pageBuilder: (context, state) {
-            return MaterialPage(child: RegisterScreen());
+            return const MaterialPage(child: RegisterScreen());
           },
         ),
         GoRoute(
           name: RouteConstants.loginRoute,
           path: '/login',
           pageBuilder: (context, state) {
-            return MaterialPage(child: LoginScreen());
+            return const MaterialPage(child: LoginScreen());
           },
         ),
         GoRoute(
           name: RouteConstants.homeRouteName,
           path: '/home',
           pageBuilder: (context, state) {
-            return MaterialPage(child: MainScreens());
+            return const MaterialPage(child: MainScreens());
+          },
+        ),
+        GoRoute(
+          name: RouteConstants.upSearchRoute,
+          path: '/search',
+          pageBuilder: (context, state) {
+            return const MaterialPage(child: MainScreens());
           },
         ),
       ],
