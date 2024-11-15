@@ -214,17 +214,22 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                ProfilePageButton('message', () {}),
+                                ProfilePageButton(
+                                  text: 'message',
+                                  onTap: () {},
+                                ),
                                 SizedBox(width: 16),
                                 isFollowed
-                                    ? ProfilePageButton('following', () {
-                                        setState(() {
-                                          isFollowed = false;
-                                        });
-                                      })
+                                    ? ProfilePageButton(
+                                        text: 'following',
+                                        onTap: () {
+                                          setState(() {
+                                            isFollowed = false;
+                                          });
+                                        })
                                     : ProfilePageButton(
-                                        'follow',
-                                        () {
+                                        text: 'follow',
+                                        onTap: () {
                                           setState(() {
                                             isFollowed = true;
                                           });
