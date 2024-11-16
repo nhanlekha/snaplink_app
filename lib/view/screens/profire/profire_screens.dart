@@ -1,5 +1,6 @@
 import 'package:animation_wrappers/Animations/faded_slide_animation.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snaplink_app/main.dart';
 
@@ -86,7 +87,7 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             shape: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide.none),
-                            onSelected: (dynamic value) {
+                            onSelected: (dynamic value) async {
                               switch (value) {
                                 case "Change Language":
                                   // Navigator.pushNamed(context, PageRoutes.languagePage);
@@ -99,6 +100,8 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                   // Navigator.pushNamed(context, PageRoutes.tncPage);
                                   break;
                                 case "Logout":
+                                  await FirebaseAuth.instance.signOut();
+
                                   break;
                                 case "Redeem Coins":
                                   // Navigator.pushNamed(context, PageRoutes.redeemCoins);

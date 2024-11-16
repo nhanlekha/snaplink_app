@@ -36,8 +36,8 @@ class _ChatListState extends State<ChatList> {
 
                     return ListTile(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChatPage(doc: doc)));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => ChatPage(doc: doc)));
                       },
                       title: Text("data"),
                       subtitle: Text(doc['recent_text']),

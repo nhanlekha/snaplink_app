@@ -26,8 +26,8 @@ class _MainScreensState extends State<MainScreens> {
     // TODO: implement initState
     super.initState();
     _pages = [
-      ChatList(),
-      ListChatScreens(),
+      Container(),
+      Container(),
       Container(color: Colors.green),
       UpPostScreens(),
       const ProfileScreen(),
