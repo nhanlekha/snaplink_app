@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snaplink_app/view/screens/chat/list_chat/chat_list.dart';
 import 'package:snaplink_app/view/screens/chat/page_chat/chat_screens.dart';
 import 'package:snaplink_app/view/screens/post/up_post_screens.dart';
 
@@ -25,8 +26,8 @@ class _MainScreensState extends State<MainScreens> {
     // TODO: implement initState
     super.initState();
     _pages = [
-      Container(color: Colors.amberAccent),
-      ListChatScreens(),
+      Container(),
+      Container(),
       Container(color: Colors.green),
       UpPostScreens(),
       const ProfileScreen(),

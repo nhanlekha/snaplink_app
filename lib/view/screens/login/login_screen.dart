@@ -12,6 +12,7 @@ import '../../../ultils/enums/auth_status.dart';
 import '../../components/theme/colors.dart';
 import '../../components/widget_custom/continue_button.dart';
 import '../../components/widget_custom/entry_field.dart';
+import '../../components/widget_custom/toast_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -141,18 +142,22 @@ class _LoginBodyState extends State<LoginBody> {
     final password = _passwordController.text;
 
     final loginCubit = BlocProvider.of<LoginCubit>(context);
+
     loginCubit.login(email, password);
 
     final state = context.read<AppCubit>().state;
     // Kiểm tra trạng thái xác thực và điều hướng tương ứng
     switch (state.authStatus) {
       case AuthStatus.unknown:
+        showToast(message: 'Lỗi đăng nhập không xac định !');
         GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
         break;
       case AuthStatus.unauthenticated:
+        showToast(message: 'Đăng nhập thành công !');
         GoRouter.of(context).pushNamed(RouteConstants.loginRoute);
         break;
       case AuthStatus.authenticated:
+        showToast(message: 'Đăng nhập thất bại !');
         GoRouter.of(context).pushNamed(RouteConstants.homeRouteName);
         break;
     }

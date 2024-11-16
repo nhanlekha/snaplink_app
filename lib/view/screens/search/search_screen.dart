@@ -163,12 +163,15 @@ class _SearchScreensState extends State<SearchScreens> {
                                         thickness: 1,
                                       ),
                                       ListTile(
-                                        leading: FadedScaleAnimation(
-                                          child: CircleAvatar(
-                                            backgroundColor: darkColor,
-                                            backgroundImage:
-                                                AssetImage(names[index].img),
+                                        leading: GestureDetector(
+                                          child: FadedScaleAnimation(
+                                            child: CircleAvatar(
+                                              backgroundColor: darkColor,
+                                              backgroundImage:
+                                                  AssetImage(names[index].img),
+                                            ),
                                           ),
+                                          onTap: () {},
                                         ),
                                         title: Text(
                                           doc['name'],
