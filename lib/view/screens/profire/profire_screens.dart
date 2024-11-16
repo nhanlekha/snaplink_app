@@ -201,8 +201,8 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                                       ),
                                       body: Container(),
                                     )),
-                                RowItem(
-                                    '12.8k', 'followers'.tr(), FollowersPage()),
+                                RowItem('12.8k', 'followers'.tr(),
+                                    const FollowersPage()),
                                 RowItem(
                                     '1.9k', 'following'.tr(), FollowingPage()),
                               ],
@@ -211,17 +211,22 @@ class _MyProfileBodyState extends State<MyProfileBody> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                ProfilePageButton('message', () {}),
+                                ProfilePageButton(
+                                  text: 'message',
+                                  onTap: () {},
+                                ),
                                 const SizedBox(width: 16),
                                 isFollowed
-                                    ? ProfilePageButton('following', () {
-                                        setState(() {
-                                          isFollowed = false;
-                                        });
-                                      })
+                                    ? ProfilePageButton(
+                                        text: 'following',
+                                        onTap: () {
+                                          setState(() {
+                                            isFollowed = false;
+                                          });
+                                        })
                                     : ProfilePageButton(
-                                        'follow',
-                                        () {
+                                        text: 'follow',
+                                        onTap: () {
                                           setState(() {
                                             isFollowed = true;
                                           });

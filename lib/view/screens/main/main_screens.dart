@@ -6,6 +6,7 @@ import 'package:snaplink_app/view/screens/chat/page_chat/chat_screens.dart';
 import 'package:snaplink_app/view/screens/post/up_post_screens.dart';
 
 import '../../../routers/app_route_constants.dart';
+import '../chat/list_chat/list_chat.dart';
 import '../profire/profire_screens.dart';
 
 class MainScreens extends StatefulWidget {
@@ -25,7 +26,7 @@ class _MainScreensState extends State<MainScreens> {
     super.initState();
     _pages = [
       Container(color: Colors.amberAccent),
-      ChatScreens(),
+      ListChatScreens(),
       Container(color: Colors.green),
       UpPostScreens(),
       const ProfileScreen(),
@@ -59,11 +60,11 @@ class _MainScreensState extends State<MainScreens> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/instagram-live.png',
+              'assets/chat.png',
               width: 24,
               height: 24,
             ),
-            label: "Live",
+            label: "Chat",
           ),
           BottomNavigationBarItem(
             icon: Container(),

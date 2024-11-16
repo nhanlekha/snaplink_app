@@ -12,5 +12,7 @@ class RouteConstants {
 
   static const String cameraRoute = "camera";
   static const String upPostRoute = "up_post";
+
+  static const String upSearchRoute = "/search";
   static const String testRoute = "test";
 }

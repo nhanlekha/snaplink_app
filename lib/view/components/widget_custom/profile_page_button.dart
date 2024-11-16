@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../theme/colors.dart';
 
 class ProfilePageButton extends StatelessWidget {
@@ -11,15 +10,21 @@ class ProfilePageButton extends StatelessWidget {
   final double? width;
   final double? height;
 
-  ProfilePageButton(this.text, this.onTap,
-      {this.color, this.textColor, this.width, this.height});
+  const ProfilePageButton(
+      {super.key,
+      this.text,
+      required this.onTap,
+      this.color,
+      this.textColor,
+      this.width,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap as void Function()?,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 6.0),
+        padding: const EdgeInsets.symmetric(vertical: 6.0),
         width: width ?? 84.0,
         height: height ?? 40.0,
         alignment: Alignment.center,
