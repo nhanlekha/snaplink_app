@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snaplink_app/main.dart';
 import 'package:snaplink_app/view/screens/camera/camera_screens.dart';
+import 'package:snaplink_app/view/screens/login/login_screen.dart';
 import 'package:snaplink_app/view/screens/main/main_screens.dart';
 import 'package:snaplink_app/view/screens/post/up_post_screens.dart';
 import 'package:snaplink_app/view/screens/register/register_screen.dart';
 import 'package:snaplink_app/view/screens/login/login_screen.dart';
+import 'package:snaplink_app/view/screens/test_components/test.dart';
 
 import '../view/screens/search/search_screen.dart';
 import 'app_route_constants.dart';
@@ -71,6 +73,13 @@ class AppRouter {
             return MaterialPage(child: SearchScreens());
           },
         ),
+        GoRoute(
+          name: RouteConstants.testRoute,
+          path: '/test',
+          pageBuilder: (context, state) {
+            return const MaterialPage(child: TestScreen());
+          },
+        )
       ],
       errorPageBuilder: (context, state) {
         return MaterialPage(child: Container());

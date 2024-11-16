@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 class ThumbTile extends StatelessWidget {
   final String mediaListData;
 
-  ThumbTile(this.mediaListData);
+  const ThumbTile(this.mediaListData, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       child: FadedScaleAnimation(
-        child:         Container(
-          margin: EdgeInsets.only(left: 8.0),
+        child: Container(
+          margin: const EdgeInsets.only(left: 8.0),
           height: screenWidth / 3,
           width: screenWidth / 4.25,
           decoration: BoxDecoration(
@@ -22,7 +22,7 @@ class ThumbTile extends StatelessWidget {
           ),
         ),
       ),
-      onTap: (){},
+      onTap: () {},
     );
   }
 }

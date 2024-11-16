@@ -1,7 +1,6 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snaplink_app/main.dart';
 
 import '../../../../routers/app_route_constants.dart';
 import '../../../components/theme/colors.dart';
@@ -70,10 +69,10 @@ class _ListChatScreensState extends State<ListChatScreens> {
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({
-    Key? key,
+    super.key,
     required this.notification,
     required this.messages,
-  }) : super(key: key);
+  });
 
   final List<Notif> notification;
   final List<String?> messages;
@@ -89,14 +88,14 @@ class MessagesPage extends StatelessWidget {
                 backgroundImage: AssetImage(notification[index].image)),
             title: Text(
               notification[index].name,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             subtitle: Row(
               children: <Widget>[
                 Expanded(
                   child: Text(
                     messages[index]!,
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: const TextStyle(color: Colors.blueGrey),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),

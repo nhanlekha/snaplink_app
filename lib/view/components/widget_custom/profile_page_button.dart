@@ -10,8 +10,9 @@ class ProfilePageButton extends StatelessWidget {
   final double? width;
   final double? height;
 
-  ProfilePageButton(
-      {this.text,
+  const ProfilePageButton(
+      {super.key,
+      this.text,
       required this.onTap,
       this.color,
       this.textColor,
@@ -23,7 +24,7 @@ class ProfilePageButton extends StatelessWidget {
     return InkWell(
       onTap: onTap as void Function()?,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 6.0),
+        padding: const EdgeInsets.symmetric(vertical: 6.0),
         width: width ?? 84.0,
         height: height ?? 40.0,
         alignment: Alignment.center,

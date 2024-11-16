@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
           final authRepo = context.read<AuthRepo>();
           return LoginCubit(authRepo: authRepo);
         },
-        child: LoginBody(),
+        child: const LoginBody(),
       )),
     );
   }
@@ -55,7 +55,7 @@ class _LoginBodyState extends State<LoginBody> {
       decoration: BoxDecoration(
         color: backgroundColor,
         border: Border.all(color: transparentColor),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       ),
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       padding: const EdgeInsets.all(16.0),
@@ -74,7 +74,7 @@ class _LoginBodyState extends State<LoginBody> {
                   .bodyLarge!
                   .copyWith(color: secondaryColor),
             ),
-            Spacer(),
+            const Spacer(),
             EntryField(
               controller: _emailController,
               label: "enterPhone".tr(),
@@ -83,7 +83,11 @@ class _LoginBodyState extends State<LoginBody> {
               controller: _passwordController,
               label: "password".tr(),
             ),
-            CustomButton(onPressed: () => {_login()}),
+            CustomButton(
+                onPressed: () => {
+                      // _login()
+                      context.go('/test')
+                    }),
             const Spacer(flex: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
